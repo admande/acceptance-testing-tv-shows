@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>New Show</title>
+  </head>
+
+
+
+  <body>
+    <h1>Add Show Details</h1>
+
+    <% if @blank %>
+      <h3>Please fill in all required fields </h3>
+    <% end %>
+
+    <% if @duplicate %>
+      <h3>The show has already been added </h3>
+    <% end %>
+
+    <form action="/television_shows/new" method="post">
+    <form action="/television_shows/new" method="post">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value = "">
+      <br><br>
+      <label for="network">Network:</label>
+      <input type="text" id="network" name="network" value = "">
+      <br><br>
+      <label for="starting_year">Starting Year:</label>
+      <input type="text" id="starting_year" name="starting_year" value = "">
+      <br><br>
+      <label for="synopsis">Synopsis:</label>
+      <input type="text" id="synopsis" name="synopsis" value = "">
+      <br><br>
+      <label for="genre">Genre</label>
+      <select name="genre" id="genre" name="genre">
+        <option value="action">Action</option>
+        <option value="mystery">Mystery</option>
+        <option value="drama">Drama</option>
+        <option value="comedy">Comedy</option>
+        <option value="fantasy">Fantasy</option>
+      </select>
+      <br><br>
+      <label for="Add TV Show">Add TV Show</label>
+      <input type="submit" id="Add TV Show" name="Add TV Show">
+    </form>
+  </body>
+</html>
