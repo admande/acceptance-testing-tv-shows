@@ -28,7 +28,7 @@ feature "user adds the same TV show" do
     fill_in "Synopsis", with: "Six friends living in New York city."
     select "Comedy", from: "Genre"
     click_button "Add TV Show"
-    
+
 
     expect(page).to have_content "The show has already been added"
   end

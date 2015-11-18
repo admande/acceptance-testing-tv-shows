@@ -8,14 +8,52 @@ class TelevisionShow
     @starting_year = params[:starting_year]
     @synopsis = params[:synopsis]
     @genre = params[:genre]
+    @errors_array = []
   end
 
   def self.all
     shows = []
-	    CSV.foreach("television-shows.csv", headers: true) do |show|
-	      shows << show
+	    CSV.foreach("television-shows.csv", header_converters: :symbol, headers: true) do |show|
+	      shows << show.to_h
 	    end
-	    shows.map { |show| TelevisionShow.new(show) }
-      
+	    shows.map do |show|
+        TelevisionShow.new(show)
+      end
 	  end
+
+  def errors
+    @errors_array
+  end
+
+  def valid?
+    unique_title
+    if
+      !title.empty? && !network.empty? && !starting_year.empty? && !synopsis.empty?
+      true
+    else
+      @errors_array << "Please fill in all required fields"
+      false
+    end
+  end
+
+  def unique_title
+    if
+      !TelevisionShow.all.any? {|show| show.title == title}
+      true
+    else
+      @errors_array << "The show has already been added"
+      false
+    end
+   end
+
+   def save
+     if valid?
+       CSV.open('television-shows.csv','a') do |file|
+         file.puts([title, network, starting_year,synopsis,genre])
+       end
+       true
+     else
+       false
+     end
+   end
 end
