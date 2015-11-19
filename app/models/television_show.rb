@@ -26,14 +26,14 @@ class TelevisionShow
   end
 
   def valid?
-    unique_title
-    if
-      !title.empty? && !network.empty? && !starting_year.empty? && !synopsis.empty?
-      true
-    else
-      @errors_array << "Please fill in all required fields"
-      false
-    end
+      flag = unique_title
+      if !title.empty? && !network.empty? && !starting_year.empty? && !synopsis.empty?
+          empty_flag = true
+      else
+        @errors_array << "Please fill in all required fields"
+          empty_flag = false
+      end
+      empty_flag == false || flag == false ? false : true
   end
 
   def unique_title

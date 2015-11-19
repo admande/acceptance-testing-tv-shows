@@ -9,7 +9,7 @@
 
     <ul>
     <% @shows.each do |show| %>
-      <h2><%= show[:title]%> (<%=show[:network]%>)</h2>
+      <h2><%= show.title%> (<%=show.network%>)</h2>
       <% end %>
     </ul>
 
